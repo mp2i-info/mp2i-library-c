@@ -78,35 +78,3 @@ void deque_print(deque* q) {
     }
     printf("\n");
 }
-
-int* minimum_sliding(int* a, int n, int k) {
-    int* min_a = malloc(sizeof(int) * (n - k + 1));
-    deque* q = empty();
-    for (int i = 0; i < n; i++) {
-        deque_print(q);
-        while (!is_empty(q) && a[i] <= a[peek_right(q)]) {
-            deque_print(q);
-            pop_right(q);
-        }
-        add_right(q, i);
-        deque_print(q);
-        if (q->left && i - peek_left(q) >= k) {
-            pop_left(q);
-        }
-        deque_print(q);
-        if (i - k + 1 >= 0) {
-            min_a[i - k + 1] = a[peek_left(q)];
-        }
-    }
-    return min_a;
-}
-
-// int main() {
-//     int a[] = {-5, 1, 3, -1, -3, 5, 3, 6, 7, 9};
-//     int n = sizeof(a) / sizeof(int);
-//     int* min_a = minimum_sliding(a, n, 3);
-//     for (int i = 0; i < n - 3 + 1; i++) {
-//         printf("%d ", min_a[i]);
-//     }
-//     return 0;
-// }
