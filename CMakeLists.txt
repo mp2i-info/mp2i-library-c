@@ -1,14 +1,23 @@
 cmake_minimum_required(VERSION 3.15)
 
-set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_BUILD_TYPE Debug)
 
 project(mp2i-library VERSION 1.0)
 
-add_subdirectory(src)
+add_library(deque src/ds/deque/deque.c)
+include_directories(src/ds/deque)
 
-add_executable(Main src/main.c)
-target_link_libraries(Main PUBLIC deque)
-target_include_directories(Main PUBLIC
-                          "${PROJECT_BINARY_DIR}"
-                          "${PROJECT_SOURCE_DIR}/src/ds"
-                          )
+include(CTest)
+enable_testing()
+file(
+	GLOB 
+	tests
+	tests/**/*.c
+)
+
+foreach(f ${tests})
+  get_filename_component(exampleName ${f} NAME_WE) 
+  add_executable (${exampleName} ${f}) 
+  target_link_libraries(${exampleName} deque)
+  add_test(NAME ${exampleName} COMMAND ${exampleName})
+endforeach(f)
