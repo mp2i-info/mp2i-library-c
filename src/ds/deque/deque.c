@@ -1,7 +1,11 @@
-#include "deque.h"
-
 #include <stdio.h>
 #include <stdlib.h>
+
+typedef struct list {
+    int val;
+    struct list* next;
+    struct list* prev;
+} list;
 
 list* list_new(int val) {
     list* l = malloc(sizeof(list));
@@ -10,6 +14,11 @@ list* list_new(int val) {
     l->prev = NULL;
     return l;
 }
+
+typedef struct deque {
+    struct list* left;
+    struct list* right;
+} deque;
 
 deque* empty() {
     deque* d = malloc(sizeof(deque));
