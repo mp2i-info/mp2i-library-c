@@ -4,15 +4,14 @@ typedef struct list {
     struct list* prev;
 } list;
 
+list* list_new(int);
+
 typedef struct deque {
     list* left;
     list* right;
 } deque;
 
-list* list_new(int);
-
 deque* empty();
-
 int is_empty(deque*);
 
 void add_right(deque*, int);

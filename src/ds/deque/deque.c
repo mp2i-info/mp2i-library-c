@@ -69,7 +69,7 @@ void pop_left(deque* q) {
 }
 
 void pop_right(deque* q) {
-    if (q->right == NULL) {
+    if (is_empty(q)) {
         return;
     }
     list* l = q->right;
