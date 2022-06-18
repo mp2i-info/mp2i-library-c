@@ -9,20 +9,19 @@ typedef struct deque {
     list* right;
 } deque;
 
-list* list_new(int val);
+list* list_new(int);
 
 deque* empty();
 
-int is_empty(deque* q);
+int is_empty(deque*);
 
-void add_right(deque* q, int x);
+void add_right(deque*, int);
+void add_left(deque*, int);
 
-int peek_left(deque* q);
+int peek_left(deque*);
+int peek_right(deque*);
 
-int peek_right(deque* q);
+void pop_left(deque*);
+void pop_right(deque*);
 
-void pop_left(deque* q);
-
-void pop_right(deque* q);
-
-void deque_print(deque* q);
+void deque_print(deque*);

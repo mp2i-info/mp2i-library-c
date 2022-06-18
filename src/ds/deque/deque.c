@@ -24,13 +24,25 @@ int is_empty(deque* q) {
 
 void add_right(deque* q, int x) {
     list* l = list_new(x);
-    if (q->left == NULL) {
+    if (is_empty(q)) {
         q->left = l;
         q->right = l;
     } else {
         l->prev = q->right;
         q->right->next = l;
         q->right = l;
+    }
+}
+
+void add_left(deque* q, int x) {
+    list* l = list_new(x);
+    if (is_empty(q)) {
+        q->left = l;
+        q->right = l;
+    } else {
+        l->next = q->left;
+        q->left->prev = l;
+        q->left = l;
     }
 }
 
@@ -43,12 +55,12 @@ int peek_right(deque* q) {
 }
 
 void pop_left(deque* q) {
-    if (q->left == NULL) {
+    if (is_empty(q)) {
         return;
     }
     list* l = q->left;
     q->left = l->next;
-    if (q->left == NULL) {
+    if (is_empty(q)) {
         q->right = NULL;
     } else {
         q->left->prev = NULL;
